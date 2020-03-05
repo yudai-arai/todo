@@ -10,19 +10,19 @@ use BBS\test\yudai\work\Delete\Delete;
 
 class BBSController extends Controller
 {
-    public function login_page_controller()
+    public function login_page()
     {
         $frontpage = new Frontpage();
         $frontpage->login_page();
     }
 
-    public function login_controller()
+    public function login()
     {
         $login = new Login();
         $login->login();
     }
 
-    public function input_controller()
+    public function input()
     {
         $frontpage = new Frontpage();
         $login = new Login();
@@ -30,7 +30,7 @@ class BBSController extends Controller
         $frontpage->input_page();
     }
 
-    public function list_get_controller()
+    public function list_get()
     {
         $frontpage = new Frontpage();
         $login = new Login();
@@ -38,7 +38,7 @@ class BBSController extends Controller
         $frontpage->list_page();
     }
 
-    public function list_post_controller()
+    public function list_post()
     {
         $frontpage = new Frontpage();
         $login = new Login();
@@ -46,19 +46,19 @@ class BBSController extends Controller
         $frontpage->list_page();
     }
 
-    public function login_failed_controller()
+    public function login_failed()
     {
         $frontpage = new Frontpage();
         $frontpage->login_failed_page();
     }
 
-    public function logout_controller()
+    public function logout()
     {
         $frontpage = new Frontpage();
         $frontpage->logout_page();
     }
 
-    public function save_controller()
+    public function save()
     {
         $post = new Post();
         $login = new Login();
@@ -66,7 +66,7 @@ class BBSController extends Controller
         $post->save_page();
     }
 
-    public function delete_controller()
+    public function delete()
     {
         $delete = new Delete();
         $login = new Login();
@@ -74,7 +74,7 @@ class BBSController extends Controller
         $delete->delete_file();
     }
 
-    public function contents_controller()
+    public function contents()
     {
         $post = new Post();
         $login = new Login();

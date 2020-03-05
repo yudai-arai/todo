@@ -17,22 +17,22 @@ use BBS\test\yudai\work\Delete\Delete;
 
 
 
-Route::get('/input', 'BBSController@input_controller');
+Route::get('/input', 'BBSController@input');
 
-Route::get('/list', 'BBSController@list_get_controller');
+Route::get('/list', 'BBSController@list_get');
 
-Route::post('/list', 'BBSController@list_post_controller');
+Route::post('/list', 'BBSController@list_post');
 
-Route::get('/login_page', 'BBSController@login_page_controller');
+Route::get('/login_page', 'BBSController@login_page');
 
-Route::post('/login', 'BBSController@login_controller');
+Route::post('/login', 'BBSController@login');
 
-Route::get('/login_failed', 'BBSController@login_failed_controller');
+Route::get('/login_failed', 'BBSController@login_failed');
 
-Route::get('/logout', 'BBSController@logout_controller');
+Route::get('/logout', 'BBSController@logout');
 
-Route::post('/save', 'BBSController@save_controller');
+Route::post('/save', 'BBSController@save');
 
-Route::post('/delete', 'BBSController@delete_controller');
+Route::post('/delete', 'BBSController@delete');
 
-Route::get('/contents', 'BBSController@contents_controller');
+Route::get('/contents', 'BBSController@contents');
