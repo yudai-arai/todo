@@ -24,11 +24,13 @@
         @endfor
         </form>
         @if ($page > 1)
-            <a href="/list?page=($page - 1)">前へ</a>
+            <a href="/list?page={{($page - 1)}}">前へ</a>
         @endif
-            <a href="/list?page={{$page_num}}">{{$page_num}}</a>
+        @for ($link = 0; $link < $maxpage; $link++) 
+            <a href="/list?page={{$link +1}}">{{$link +1}}</a>
+        @endfor
         @if ($page < $maxpage)
-            <a href="/list?page=($page + 1)">次へ</a>
+            <a href="/list?page={{($page + 1)}}">次へ</a>
         @endif
         <br>
         <input type="submit" onclick="location.href='./input'" value="追加">

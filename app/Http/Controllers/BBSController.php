@@ -41,7 +41,19 @@ class BBSController extends Controller
 
     public function input()
     {
-        return view('input');
+        
+        $config = new Config();
+        if (($_SERVER['REQUEST_URI'] != '/login_page') && ($_SERVER['REQUEST_URI'] != '/login') && ($_SERVER['REQUEST_URI'] != '/login_failed')) {
+            if (!file_exists($config->get_folder_login() . 'user.txt')) {
+                return view('login');
+                exit;
+            } elseif (!file_get_contents($config->get_folder_login() . 'user.txt') == $_SERVER['REMOTE_ADDR']) {
+                return view('login');
+                exit;
+            } else {
+                return view('input');
+            }
+        }
         //$frontpage = new Frontpage();
         //$login = new Login();
         //$login->login_check();
@@ -87,7 +99,15 @@ class BBSController extends Controller
         for ($link = 0; $link < $maxpage; $link++) {
             $page_num = $link + 1;
         }
-        return view('list', [
+        if (($_SERVER['REQUEST_URI'] != '/login_page') && ($_SERVER['REQUEST_URI'] != '/login') && ($_SERVER['REQUEST_URI'] != '/login_failed')) {
+            if (!file_exists($config->get_folder_login() . 'user.txt')) {
+                return view('login');
+                exit;
+            } elseif (!file_get_contents($config->get_folder_login() . 'user.txt') == $_SERVER['REMOTE_ADDR']) {
+                return view('login');
+                exit;
+            } else {
+                return view('list', [
             'list' => $list,
             'newlist' => $newlist,
             'cnt' => $cnt,
@@ -99,6 +119,9 @@ class BBSController extends Controller
             'link' => $link,
             'page_num' => $page_num
         ]);
+            }
+        }
+        
         //$frontpage = new Frontpage();
         //$login = new Login();
         //$login->login_check();
@@ -109,7 +132,7 @@ class BBSController extends Controller
     {
         $config = new Config();
         $list = glob($config->get_folder() . '*.txt');
-        $newlist = [];
+        $newlist = array();
         if (array_key_exists('search_file', $_POST)) {
             if ($_POST['search_file'] != '') {
                 foreach ($list as $value) {
@@ -135,11 +158,24 @@ class BBSController extends Controller
         }
         $start = $limit * ($page - 1);
         
-        $index = 0;
-        $name = $list[$start + $index];
+        for ($index = 0; $index < $limit; $index++) {
+            if (($start + $index + 1) <= $cnt) {
+                $name = $list[$start + $index];
+            }
+        }
         $link = 0;
-        $page_num = $link + 1;
-        return view('list', [
+        for ($link = 0; $link < $maxpage; $link++) {
+            $page_num = $link + 1;
+        }
+        if (($_SERVER['REQUEST_URI'] != '/login_page') && ($_SERVER['REQUEST_URI'] != '/login') && ($_SERVER['REQUEST_URI'] != '/login_failed')) {
+            if (!file_exists($config->get_folder_login() . 'user.txt')) {
+                return view('login');
+                exit;
+            } elseif (!file_get_contents($config->get_folder_login() . 'user.txt') == $_SERVER['REMOTE_ADDR']) {
+                return view('login');
+                exit;
+            } else {
+                return view('list', [
             'list' => $list,
             'newlist' => $newlist,
             'cnt' => $cnt,
@@ -151,6 +187,8 @@ class BBSController extends Controller
             'link' => $link,
             'page_num' => $page_num
         ]);
+            }
+        }
         //$frontpage = new Frontpage();
         //$login = new Login();
         //$login->login_check();
@@ -180,6 +218,18 @@ class BBSController extends Controller
             file_put_contents($config->get_folder() . date("YmdHis") . '.txt', $_POST['nickname'] .'|'.$_POST['title'] .'|'.$_POST['text']);
         }
         return view('save');
+        
+        if (($_SERVER['REQUEST_URI'] != '/login_page') && ($_SERVER['REQUEST_URI'] != '/login') && ($_SERVER['REQUEST_URI'] != '/login_failed')) {
+            if (!file_exists($config->get_folder_login() . 'user.txt')) {
+                return view('login');
+                exit;
+            } elseif (!file_get_contents($config->get_folder_login() . 'user.txt') == $_SERVER['REMOTE_ADDR']) {
+                return view('login');
+                exit;
+            } else{
+                return view('save');
+            }
+        }
         //$post = new Post();
         //$login = new Login();
         //$login->login_check();
@@ -202,6 +252,16 @@ class BBSController extends Controller
                 exit;
             }
         }
+        
+        if (($_SERVER['REQUEST_URI'] != '/login_page') && ($_SERVER['REQUEST_URI'] != '/login') && ($_SERVER['REQUEST_URI'] != '/login_failed')) {
+            if (!file_exists($config->get_folder_login() . 'user.txt')) {
+                return view('login');
+                exit;
+            } elseif (!file_get_contents($config->get_folder_login() . 'user.txt') == $_SERVER['REMOTE_ADDR']) {
+                return view('login');
+                exit;
+            }
+        }
         //$delete = new Delete();
         //$login = new Login();
         //$login->login_check();
@@ -216,11 +276,23 @@ class BBSController extends Controller
             $filecontent = explode( '|', $filecontents);
             
         }
-        return view('contents', [
-            'filecontents' => $filecontents,
-            'filecontent' => $filecontent,
-            
-        ]);
+        
+        
+        if (($_SERVER['REQUEST_URI'] != '/login_page') && ($_SERVER['REQUEST_URI'] != '/login') && ($_SERVER['REQUEST_URI'] != '/login_failed')) {
+            if (!file_exists($config->get_folder_login() . 'user.txt')) {
+                return view('login');
+                exit;
+            } elseif (!file_get_contents($config->get_folder_login() . 'user.txt') == $_SERVER['REMOTE_ADDR']) {
+                return view('login');
+                exit;
+            } else{
+                return view('contents', [
+                    'filecontents' => $filecontents,
+                    'filecontent' => $filecontent,
+                    
+                ]);
+            }
+        }
         //$post = new Post();
         //$login = new Login();
         //$login->login_check();
